@@ -7,8 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import ru.adeg.dms.saservice.entity.*;
 import ru.adeg.dms.saservice.repository.*;
 
-import java.util.HashSet;
-import java.util.Set;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
