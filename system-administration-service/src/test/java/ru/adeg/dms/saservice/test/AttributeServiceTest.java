@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.adeg.dms.saservice.entity.Attribute;
+import ru.adeg.dms.saservice.service.AttributeService;
 import ru.adeg.dms.saservice.service.impl.AttributeServiceImpl;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class AttributeServiceTest {
     private TestEntityManager entityManager;
 
     @Autowired
-    private AttributeServiceImpl attributeService;
+    private AttributeService attributeService;
 
     @Test
     public void testFindByName() {

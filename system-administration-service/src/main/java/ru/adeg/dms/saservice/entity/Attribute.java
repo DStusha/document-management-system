@@ -1,7 +1,5 @@
 package ru.adeg.dms.saservice.entity;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,10 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Data
-
-
-@Entity(name = "Attribute")
+@Entity
+@Table(name = "attribute")
 public class Attribute {
 
     @Id

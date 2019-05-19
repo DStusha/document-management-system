@@ -75,5 +75,4 @@ public class TemplateAttributes implements Serializable {
     public int hashCode() {
         return Objects.hash(getTemplate(),getAttribute());
     }
-
 }
