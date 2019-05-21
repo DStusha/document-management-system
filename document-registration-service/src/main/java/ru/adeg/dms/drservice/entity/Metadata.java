@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Document(collection = "documents")
-public class DocumentEntity {
+public class Metadata {
     @Id
     private ObjectId id;
     private Date upload_date;
@@ -20,7 +20,7 @@ public class DocumentEntity {
     private List<Attribute> attributes;
     private Permissions permissions;
 
-    public DocumentEntity() { }
+    public Metadata() { }
 
     public ObjectId getId() {
         return id;
