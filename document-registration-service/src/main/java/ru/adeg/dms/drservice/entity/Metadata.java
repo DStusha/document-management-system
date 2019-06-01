@@ -4,13 +4,14 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Document(collection = "documents")
 public class Metadata {
     @Id
-    private ObjectId id;
+    private ObjectId _id;
     private Date upload_date;
     private String directory_name;
     private String document_type;
@@ -23,11 +24,11 @@ public class Metadata {
     public Metadata() { }
 
     public ObjectId getId() {
-        return id;
+        return _id;
     }
 
     public void setId(ObjectId id) {
-        this.id = id;
+        this._id = id;
     }
 
     public Date getUpload_date() {
@@ -92,5 +93,21 @@ public class Metadata {
 
     public void setPermissions(Permissions permissions) {
         this.permissions = permissions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Metadata)) return false;
+        Metadata metadata = (Metadata) o;
+        return getDirectory_name().equals(metadata.getDirectory_name()) &&
+                getDocument_type().equals(metadata.getDocument_type()) &&
+                getUser().equals(metadata.getUser()) &&
+                getFile_path().equals(metadata.getFile_path());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getFile_path());
     }
 }

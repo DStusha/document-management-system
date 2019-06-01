@@ -9,7 +9,7 @@ import ru.adeg.dms.saservice.repository.*;
 
 
 @SpringBootApplication
-public class Application implements CommandLineRunner {
+public class Application {
 
     @Autowired
     private DocumentTypeRepository repository;
@@ -18,11 +18,11 @@ public class Application implements CommandLineRunner {
         SpringApplication.run(Application.class, args);
     }
 
-    @Override
-    public void run(String... args) {
-        DocumentType att = repository.findById(6L).get();
-        att.setName("ssssssssss");
-        repository.saveAndFlush(att);
-    }
+//    @Override
+//    public void run(String... args) {
+//        DocumentType att = repository.findById(6L).get();
+//        att.setName("ssssssssss");
+//        repository.saveAndFlush(att);
+//    }
 
 }
