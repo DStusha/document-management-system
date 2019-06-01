@@ -1,28 +1,58 @@
 package ru.adeg.dms.saservice;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ru.adeg.dms.saservice.entity.*;
-import ru.adeg.dms.saservice.repository.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ru.adeg.dms.security.TokenAuthenticationFilter;
+import ru.adeg.dms.security.TokenAuthenticationService;
 
 
 @SpringBootApplication
-public class Application {
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled=true)
+public class Application extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private DocumentTypeRepository repository;
+    @Value("${token.key}")
+    private String tokenKey;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
-//    @Override
-//    public void run(String... args) {
-//        DocumentType att = repository.findById(6L).get();
-//        att.setName("ssssssssss");
-//        repository.saveAndFlush(att);
-//    }
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.headers()
+                .frameOptions()
+                .sameOrigin()
+                .and()
+                .csrf()
+                .disable()
+                .addFilterAfter(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Bean(name = "tokenAuthenticationFilter")
+    public TokenAuthenticationFilter tokenAuthenticationFilter() {
+        return new TokenAuthenticationFilter(tokenService());
+    }
+
+    @Bean(name = "tokenService")
+    public TokenAuthenticationService tokenService() {
+        TokenAuthenticationService tokenService = new TokenAuthenticationService();
+        tokenService.setKey(tokenKey);
+        return tokenService;
+    }
 }

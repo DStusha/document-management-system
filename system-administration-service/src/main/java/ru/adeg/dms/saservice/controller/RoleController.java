@@ -32,6 +32,7 @@ public class RoleController {
             throw new EntityNotFoundException("id-" + roleId);
         return ResponseEntity.ok().body(Role.get());
     }
+
     @PostMapping
     public ResponseEntity<Role> createRole(@RequestBody @Valid Role Role) {
         Role p = roleService.addRole(Role);

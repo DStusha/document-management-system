@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
+    String login(final String login, final String password);
     User addUser(User user);
     void delete(long id);
     List<User> getAll();

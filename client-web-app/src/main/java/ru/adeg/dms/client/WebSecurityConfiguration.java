@@ -1,8 +1,7 @@
-package ru.adeg.dms.drservice;
+package ru.adeg.dms.client;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -14,18 +13,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import ru.adeg.dms.security.TokenAuthenticationFilter;
 import ru.adeg.dms.security.TokenAuthenticationService;
 
-@SpringBootApplication
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled=true)
-public class Application extends WebSecurityConfigurerAdapter {
-
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Value("${token.key}")
     private String tokenKey;
-
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {

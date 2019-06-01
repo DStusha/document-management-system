@@ -1,7 +1,10 @@
 package ru.adeg.dms.uservice.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,8 +16,8 @@ public class User {
     @Column
     private String password;
 
-    @Column
-    private Long role_id;
+    @OneToMany(mappedBy = "user_id", orphanRemoval = true, cascade={CascadeType.REMOVE, CascadeType.MERGE})
+    private Set<UserRole> roles = new HashSet<UserRole>();
 
     public User() { }
 
@@ -42,11 +45,11 @@ public class User {
         this.password = password;
     }
 
-    public Long getRole_id() {
-        return role_id;
+    public Set<UserRole> getRoles() {
+        return roles;
     }
 
-    public void setRole_id(Long role_id) {
-        this.role_id = role_id;
+    public void setRoles(Set<UserRole> roles) {
+        this.roles = roles;
     }
 }

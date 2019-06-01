@@ -1,4 +1,4 @@
-package ru.adeg.dms.drservice;
+package ru.adeg.dms.uservice;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;

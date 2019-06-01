@@ -1,25 +1,21 @@
 package ru.adeg.dms.security;
 
+import java.util.List;
+
 public final class TokenUser {
-    private final Long id;
     private final String login;
-    private final Long roleId;
+    private final List<String> roles;
 
-    public TokenUser(Long id, String login, Long roleId) {
-        this.id = id;
+    public TokenUser(String login, List<String> roles) {
         this.login = login;
-        this.roleId = roleId;
-    }
-
-    public Long getId() {
-        return id;
+        this.roles = roles;
     }
 
     public String getLogin() {
         return login;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public List<String> getRoles() {
+        return roles;
     }
 }
