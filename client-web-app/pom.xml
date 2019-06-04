@@ -29,7 +29,7 @@
        </dependency>
        <dependency>
            <groupId>ru.adeg.dms</groupId>
-           <artifactId>security-module</artifactId>
+           <artifactId>common-module</artifactId>
            <version>1.0.0</version>
        </dependency>
    </dependencies>

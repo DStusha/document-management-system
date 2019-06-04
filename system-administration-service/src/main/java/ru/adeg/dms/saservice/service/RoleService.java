@@ -9,6 +9,6 @@ public interface RoleService {
     Role addRole(Role role);
     void delete(long id);
     List<Role> getAll();
-    Optional<Role> getRoleByName(String name);
-    Optional<Role> getRoleById(Long id);
+    Optional<Role> getRoleEntityById(Long id);
+    ru.adeg.dms.models.Role getRoleById(Long id);
 }

@@ -25,12 +25,12 @@ public class RoleController {
     }
 
     @GetMapping(value = "/{roleId}")
-    public ResponseEntity<Role> getRole(@PathVariable("roleId") Long roleId)
+    public ResponseEntity<ru.adeg.dms.models.Role> getRole(@PathVariable("roleId") Long roleId)
             throws EntityNotFoundException {
-        Optional<Role> Role = roleService.getRoleById(roleId);
-        if (!Role.isPresent())
+        ru.adeg.dms.models.Role role = roleService.getRoleById(roleId);
+        if (role == null)
             throw new EntityNotFoundException("id-" + roleId);
-        return ResponseEntity.ok().body(Role.get());
+        return ResponseEntity.ok().body(role);
     }
 
     @PostMapping
@@ -41,7 +41,7 @@ public class RoleController {
     @PutMapping(value = "/{roleId}")
     public ResponseEntity<Role> updateRole(@RequestBody @Valid Role Role,
                                            @PathVariable("roleId") Long roleId) throws EntityNotFoundException {
-        Optional<Role> p = roleService.getRoleById(roleId);
+        Optional<Role> p = roleService.getRoleEntityById(roleId);
         if (!p.isPresent())
             throw new EntityNotFoundException("id-" + roleId);
         return ResponseEntity.ok().body(roleService.addRole(Role));
@@ -49,7 +49,7 @@ public class RoleController {
     @DeleteMapping(value = "/{roleId}")
     public ResponseEntity<Role> deleteRole(@PathVariable("roleId") Long roleId)
             throws EntityNotFoundException {
-        Optional<Role> p = roleService.getRoleById(roleId);
+        Optional<Role> p = roleService.getRoleEntityById(roleId);
         if (!p.isPresent())
             throw new EntityNotFoundException("id-" + roleId);
         roleService.delete(roleId);

@@ -14,8 +14,8 @@
         <module>document-registration-service</module>
         <module>client-web-app</module>
         <module>document-search-service</module>
-        <module>user-service</module>
-        <module>security-module</module>
+        <module>authentication-service</module>
+        <module>common-module</module>
     </modules>
 
     <properties>
